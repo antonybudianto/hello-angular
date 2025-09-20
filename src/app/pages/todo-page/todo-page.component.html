@@ -1,0 +1,33 @@
+<div class="todo-app">
+  <header class="app-header">
+    <h1>{{ title() }}</h1>
+  </header>
+
+  <app-todo-input></app-todo-input>
+
+  <main class="todo-list-container">
+    @if (todos().length === 0) {
+    <div class="empty-state">
+      <p>No todos yet. Add one above!</p>
+    </div>
+    } @else {
+    <div class="todo-list">
+      @for (todo of todos(); track todo.id) {
+      <app-todo-item [todo]="todo"></app-todo-item>
+      }
+    </div>
+
+    <footer class="todo-footer">
+      <div class="todo-count">
+        <span>{{ activeTodos().length }} item{{ activeTodos().length === 1 ? '' : 's' }} left</span>
+      </div>
+
+      @if (completedTodos().length > 0) {
+      <button (click)="clearCompleted()" class="clear-completed">
+        Clear completed ({{ completedTodos().length }})
+      </button>
+      }
+    </footer>
+    }
+  </main>
+</div>
